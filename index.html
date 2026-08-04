@@ -2,10 +2,18 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>BilgeGames | Mobile Games</title>
-  <meta name="description" content="BilgeGames tarafından geliştirilen eğlenceli mobil bulmaca ve casual oyunları keşfedin.">
+
+  <meta
+    name="description"
+    content="BilgeGames tarafından geliştirilen eğlenceli mobil bulmaca ve casual oyunları keşfedin."
+  >
 
   <style>
     * {
@@ -20,51 +28,681 @@
 
     body {
       font-family: Arial, Helvetica, sans-serif;
-      background: #070b18;
+      background: #02060b;
       color: #ffffff;
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
     a {
-      text-decoration: none;
       color: inherit;
+      text-decoration: none;
     }
 
     header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(7, 11, 24, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(2, 6, 11, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(0, 183, 255, 0.12);
     }
 
     .navbar {
       max-width: 1150px;
       margin: auto;
-      padding: 18px 24px;
+      padding: 20px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
     .logo {
-      font-size: 24px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-family: Impact, "Arial Black", Arial, sans-serif;
+      font-size: 32px;
       font-weight: 900;
-      letter-spacing: 1px;
+      letter-spacing: -1px;
+      line-height: 1;
+      white-space: nowrap;
     }
 
-    .logo span {
-      color: #6c63ff;
+    .logo-white {
+      color: #ffffff;
+      text-shadow:
+        0 2px 0 rgba(210, 210, 210, 0.35),
+        0 0 12px rgba(255, 255, 255, 0.08);
+    }
+
+    .logo-green {
+      color: #aaff00;
+      text-shadow:
+        0 0 8px rgba(170, 255, 0, 0.4),
+        0 0 20px rgba(170, 255, 0, 0.18);
     }
 
     .nav-links {
       display: flex;
-      gap: 25px;
-      color: #d7d9e4;
+      gap: 26px;
+      color: #c8ced8;
       font-size: 15px;
     }
 
+    .nav-links a {
+      transition: 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #aaff00;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 84vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 24px;
+      overflow: hidden;
+      text-align: center;
+      background:
+        radial-gradient(
+          circle at 20% 25%,
+          rgba(0, 183, 255, 0.2),
+          transparent 36%
+        ),
+        radial-gradient(
+          circle at 82% 72%,
+          rgba(170, 255, 0, 0.12),
+          transparent 36%
+        ),
+        radial-gradient(
+          circle at 50% 100%,
+          rgba(0, 255, 204, 0.08),
+          transparent 34%
+        ),
+        linear-gradient(180deg, #050b14 0%, #02060b 100%);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      top: 10%;
+      right: -160px;
+      border-radius: 50%;
+      background: rgba(170, 255, 0, 0.08);
+      filter: blur(35px);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      left: -160px;
+      bottom: 5%;
+      border-radius: 50%;
+      background: rgba(0, 183, 255, 0.12);
+      filter: blur(40px);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 880px;
+    }
+
+    .small-title {
+      display: inline-block;
+      padding: 9px 18px;
+      margin-bottom: 26px;
+      border: 1px solid rgba(170, 255, 0, 0.22);
+      border-radius: 30px;
+      background: rgba(170, 255, 0, 0.06);
+      color: #d9ff8a;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      margin-bottom: 25px;
+      font-size: clamp(46px, 9vw, 90px);
+      line-height: 1.04;
+      letter-spacing: -2px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(
+        90deg,
+        #00b7ff 0%,
+        #00e0c6 50%,
+        #aaff00 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 660px;
+      margin: 0 auto 38px;
+      color: #b7bec9;
+      font-size: 18px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 15px 27px;
+      border-radius: 13px;
+      font-weight: 800;
+      transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        border-color 0.2s;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+    }
+
+    .button-primary {
+      background: linear-gradient(
+        90deg,
+        #00b7ff 0%,
+        #00dcb0 55%,
+        #aaff00 100%
+      );
+      color: #021016;
+      box-shadow: 0 10px 35px rgba(0, 183, 255, 0.15);
+    }
+
+    .button-primary:hover {
+      box-shadow: 0 14px 40px rgba(170, 255, 0, 0.16);
+    }
+
+    .button-secondary {
+      border: 1px solid rgba(0, 183, 255, 0.2);
+      background: rgba(255, 255, 255, 0.04);
+      color: #ffffff;
+    }
+
+    .button-secondary:hover {
+      border-color: rgba(170, 255, 0, 0.38);
+    }
+
+    section {
+      padding: 90px 24px;
+    }
+
+    .container {
+      max-width: 1150px;
+      margin: auto;
+    }
+
+    .section-title {
+      margin-bottom: 52px;
+      text-align: center;
+    }
+
+    .section-title h2 {
+      margin-bottom: 10px;
+      font-size: 40px;
+    }
+
+    .section-title p {
+      color: #aab2bf;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .game-card {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      border: 1px solid rgba(0, 183, 255, 0.11);
+      border-radius: 23px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(10, 20, 33, 0.98),
+          rgba(4, 10, 18, 0.98)
+        );
+      transition:
+        transform 0.25s,
+        border-color 0.25s,
+        box-shadow 0.25s;
+    }
+
+    .game-card::before {
+      content: "";
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      top: -90px;
+      right: -80px;
+      border-radius: 50%;
+      background: rgba(170, 255, 0, 0.08);
+      filter: blur(10px);
+    }
+
+    .game-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(170, 255, 0, 0.48);
+      box-shadow: 0 20px 55px rgba(0, 0, 0, 0.28);
+    }
+
+    .game-icon {
+      position: relative;
+      z-index: 1;
+      width: 78px;
+      height: 78px;
+      margin-bottom: 23px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      background: linear-gradient(
+        135deg,
+        #007dff 0%,
+        #00c7df 55%,
+        #aaff00 100%
+      );
+      color: #ffffff;
+      font-size: 32px;
+      font-weight: 900;
+      box-shadow: 0 10px 30px rgba(0, 183, 255, 0.18);
+    }
+
+    .game-card h3 {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .game-card p {
+      min-height: 76px;
+      margin-bottom: 23px;
+      color: #aeb6c3;
+    }
+
+    .game-link {
+      display: inline-block;
+      color: #aaff00;
+      font-weight: 800;
+      transition: 0.2s;
+    }
+
+    .game-link:hover {
+      color: #00dfff;
+    }
+
+    .about {
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(0, 183, 255, 0.08),
+          transparent 40%
+        ),
+        #040911;
+    }
+
+    .about-box {
+      max-width: 860px;
+      margin: auto;
+      padding: 48px;
+      border: 1px solid rgba(0, 183, 255, 0.1);
+      border-radius: 25px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(9, 18, 30, 0.98),
+          rgba(4, 10, 18, 0.98)
+        );
+      text-align: center;
+    }
+
+    .about-box h2 {
+      margin-bottom: 20px;
+      font-size: 37px;
+    }
+
+    .about-box p {
+      color: #b2bac6;
+      font-size: 17px;
+    }
+
+    .contact {
+      text-align: center;
+      background:
+        radial-gradient(
+          circle at 50% 100%,
+          rgba(170, 255, 0, 0.08),
+          transparent 35%
+        );
+    }
+
+    .contact h2 {
+      margin-bottom: 15px;
+      font-size: 37px;
+    }
+
+    .contact p {
+      margin-bottom: 27px;
+      color: #adb5c1;
+    }
+
+    footer {
+      padding: 31px 24px;
+      border-top: 1px solid rgba(0, 183, 255, 0.1);
+      background: #02060b;
+      color: #89929f;
+    }
+
+    .footer-content {
+      max-width: 1150px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      transition: 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: #aaff00;
+    }
+
+    @media (max-width: 800px) {
+      .navbar {
+        padding: 19px 20px;
+      }
+
+      .logo {
+        gap: 7px;
+        font-size: 27px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        min-height: 78vh;
+        padding: 80px 20px;
+      }
+
+      .hero h1 {
+        letter-spacing: -1px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .games-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .game-card {
+        padding: 27px;
+      }
+
+      .game-card p {
+        min-height: auto;
+      }
+
+      .about-box {
+        padding: 32px 22px;
+      }
+
+      .footer-content {
+        justify-content: center;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .logo {
+        font-size: 24px;
+      }
+
+      .hero h1 {
+        font-size: 45px;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar">
+
+      <a class="logo" href="#">
+        <span class="logo-white">BILGE</span>
+        <span class="logo-green">GAMES</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#games">Oyunlarımız</a>
+        <a href="#about">Hakkımızda</a>
+        <a href="#contact">İletişim</a>
+      </div>
+
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="hero-content">
+
+        <div class="small-title">
+          Mobil oyun stüdyosu
+        </div>
+
+        <h1>
+          Simple Games.<br>
+          <span>Big Challenges.</span>
+        </h1>
+
+        <p>
+          Eğlenceli, hızlı ve dikkat gerektiren mobil oyunlar
+          geliştiriyoruz. Kendine güveniyorsan oyunlarımızı keşfet.
+        </p>
+
+        <div class="buttons">
+
+          <a
+            href="#games"
+            class="button button-primary"
+          >
+            Oyunlarımızı Keşfet
+          </a>
+
+          <a
+            href="#contact"
+            class="button button-secondary"
+          >
+            Bize Ulaş
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="games">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Oyunlarımız</h2>
+
+          <p>
+            BilgeGames tarafından geliştirilen mobil oyunlar.
+          </p>
+        </div>
+
+        <div class="games-grid">
+
+          <article class="game-card">
+
+            <div class="game-icon">N</div>
+
+            <h3>FindTheN</h3>
+
+            <p>
+              Benzer sayıların arasındaki farklı sayıyı bul.
+              Süreyi yen ve en yüksek skoru yap.
+            </p>
+
+            <a
+              class="game-link"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Google Play'de Gör →
+            </a>
+
+          </article>
+
+          <article class="game-card">
+
+            <div class="game-icon">R</div>
+
+            <h3>Rectangle</h3>
+
+            <p>
+              Düşün, doğru hamleyi yap ve şekilleri bölerek
+              bölümleri tamamla.
+            </p>
+
+            <a
+              class="game-link"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Google Play'de Gör →
+            </a>
+
+          </article>
+
+          <article class="game-card">
+
+            <div class="game-icon">↔</div>
+
+            <h3>HardArrows</h3>
+
+            <p>
+              Okların yönlerini takip et, doğru seçimi yap
+              ve reflekslerini test et.
+            </p>
+
+            <a
+              class="game-link"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Google Play'de Gör →
+            </a>
+
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="container">
+
+        <div class="about-box">
+
+          <h2>BilgeGames Hakkında</h2>
+
+          <p>
+            BilgeGames, oyunculara basit görünen ancak ustalaşması
+            zor deneyimler sunan mobil oyunlar geliştirir.
+            Amacımız her yaştan oyuncunun kısa sürede anlayabileceği,
+            eğlenceli ve kaliteli oyunlar üretmektir.
+          </p>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <h2>Bizimle İletişime Geç</h2>
+
+        <p>
+          Oyunlarımız, destek veya iş birliği hakkında
+          bize ulaşabilirsiniz.
+        </p>
+
+        <a
+          href="mailto:oogaamess@gmail.com"
+          class="button button-primary"
+        >
+          oogaamess@gmail.com
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-content">
+
+      <div>
+        © 2026 BilgeGames. Tüm hakları saklıdır.
+      </div>
+
+      <div class="footer-links">
+        <a href="privacy-policy.html">
+          Privacy Policy
+        </a>
+
+        <a href="mailto:oogaamess@gmail.com">
+          Contact
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>
     .nav-links a:hover {
       color: #ffffff;
     }
