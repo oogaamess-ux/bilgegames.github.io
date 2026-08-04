@@ -2,10 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Privacy Policy | BilgeGames</title>
-  <meta name="description" content="BilgeGames Privacy Policy">
+
+  <meta
+    name="description"
+    content="BilgeGames Privacy Policy"
+  >
 
   <style>
     * {
@@ -21,8 +29,17 @@
     body {
       font-family: Arial, Helvetica, sans-serif;
       background:
-        radial-gradient(circle at 10% 10%, rgba(108, 99, 255, 0.18), transparent 30%),
-        #070b18;
+        radial-gradient(
+          circle at 15% 10%,
+          rgba(0, 183, 255, 0.16),
+          transparent 32%
+        ),
+        radial-gradient(
+          circle at 85% 80%,
+          rgba(170, 255, 0, 0.09),
+          transparent 35%
+        ),
+        #02060b;
       color: #ffffff;
       line-height: 1.75;
     }
@@ -36,85 +53,141 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(7, 11, 24, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(2, 6, 11, 0.93);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(0, 183, 255, 0.12);
     }
 
     .navbar {
       max-width: 1100px;
       margin: auto;
-      padding: 18px 24px;
+      padding: 20px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 20px;
     }
 
     .logo {
-      font-size: 24px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-family: Impact, "Arial Black", Arial, sans-serif;
+      font-size: 32px;
       font-weight: 900;
-      letter-spacing: 1px;
+      letter-spacing: -1px;
+      line-height: 1;
+      white-space: nowrap;
     }
 
-    .logo span {
-      color: #6c63ff;
+    .logo-white {
+      color: #ffffff;
+      text-shadow:
+        0 2px 0 rgba(210, 210, 210, 0.35),
+        0 0 12px rgba(255, 255, 255, 0.08);
+    }
+
+    .logo-green {
+      color: #aaff00;
+      text-shadow:
+        0 0 8px rgba(170, 255, 0, 0.4),
+        0 0 20px rgba(170, 255, 0, 0.18);
     }
 
     .home-link {
-      padding: 10px 16px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #d8dbea;
+      padding: 11px 17px;
+      border: 1px solid rgba(0, 183, 255, 0.18);
+      border-radius: 11px;
+      background: rgba(255, 255, 255, 0.04);
+      color: #d6dce5;
       font-size: 14px;
+      font-weight: 700;
+      transition: 0.2s;
     }
 
     .home-link:hover {
-      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(170, 255, 0, 0.4);
+      color: #aaff00;
+      transform: translateY(-2px);
     }
 
     main {
-      max-width: 900px;
+      max-width: 920px;
       margin: auto;
       padding: 80px 24px;
     }
 
     .page-heading {
+      margin-bottom: 48px;
       text-align: center;
-      margin-bottom: 45px;
     }
 
-    .page-heading span {
+    .page-heading .tag {
       display: inline-block;
-      margin-bottom: 16px;
-      padding: 7px 14px;
+      margin-bottom: 18px;
+      padding: 8px 16px;
+      border: 1px solid rgba(170, 255, 0, 0.22);
       border-radius: 30px;
-      background: rgba(108, 99, 255, 0.12);
-      border: 1px solid rgba(108, 99, 255, 0.3);
-      color: #aaa5ff;
+      background: rgba(170, 255, 0, 0.06);
+      color: #d9ff8a;
       font-size: 13px;
     }
 
     .page-heading h1 {
-      font-size: clamp(38px, 8vw, 62px);
-      line-height: 1.1;
-      margin-bottom: 16px;
+      margin-bottom: 17px;
+      font-size: clamp(40px, 8vw, 64px);
+      line-height: 1.08;
+      letter-spacing: -1px;
+    }
+
+    .page-heading h1 span {
+      background: linear-gradient(
+        90deg,
+        #00b7ff 0%,
+        #00e0c6 50%,
+        #aaff00 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
     }
 
     .page-heading p {
-      color: #aeb4c5;
+      color: #aab3bf;
     }
 
     .policy-card {
-      padding: 45px;
-      border-radius: 24px;
-      background: linear-gradient(145deg, #11172a, #0d1222);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
+      position: relative;
+      overflow: hidden;
+      padding: 48px;
+      border: 1px solid rgba(0, 183, 255, 0.11);
+      border-radius: 25px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(10, 20, 33, 0.98),
+          rgba(4, 10, 18, 0.98)
+        );
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.28);
+    }
+
+    .policy-card::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      top: -110px;
+      right: -100px;
+      border-radius: 50%;
+      background: rgba(170, 255, 0, 0.08);
+      filter: blur(14px);
     }
 
     .policy-card section {
-      margin-bottom: 35px;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 38px;
     }
 
     .policy-card section:last-child {
@@ -122,36 +195,70 @@
     }
 
     .policy-card h2 {
-      margin-bottom: 12px;
-      font-size: 22px;
+      position: relative;
+      margin-bottom: 14px;
+      padding-left: 17px;
       color: #ffffff;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+
+    .policy-card h2::before {
+      content: "";
+      position: absolute;
+      top: 6px;
+      left: 0;
+      width: 5px;
+      height: 22px;
+      border-radius: 10px;
+      background: linear-gradient(
+        180deg,
+        #00b7ff,
+        #aaff00
+      );
     }
 
     .policy-card p,
     .policy-card li {
-      color: #b5bac9;
+      color: #b3bbc7;
+    }
+
+    .policy-card p + p {
+      margin-top: 12px;
     }
 
     .policy-card ul {
-      padding-left: 22px;
-      margin-top: 10px;
+      margin-top: 12px;
+      padding-left: 23px;
     }
 
     .policy-card li {
       margin-bottom: 8px;
     }
 
+    .policy-card li::marker {
+      color: #aaff00;
+    }
+
     .email {
-      color: #8f88ff;
-      font-weight: bold;
+      display: inline-block;
+      margin-top: 8px;
+      color: #aaff00;
+      font-weight: 800;
       word-break: break-word;
+      transition: 0.2s;
+    }
+
+    .email:hover {
+      color: #00dfff;
     }
 
     footer {
       margin-top: 70px;
-      padding: 28px 24px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      color: #8d93a6;
+      padding: 31px 24px;
+      border-top: 1px solid rgba(0, 183, 255, 0.1);
+      background: #02060b;
+      color: #89929f;
     }
 
     .footer-content {
@@ -163,22 +270,44 @@
       flex-wrap: wrap;
     }
 
-    @media (max-width: 650px) {
-      main {
-        padding: 55px 18px;
-      }
+    .footer-content a {
+      transition: 0.2s;
+    }
 
+    .footer-content a:hover {
+      color: #aaff00;
+    }
+
+    @media (max-width: 700px) {
       .navbar {
-        padding: 16px 18px;
+        padding: 18px 18px;
       }
 
       .logo {
-        font-size: 20px;
+        gap: 7px;
+        font-size: 26px;
+      }
+
+      .home-link {
+        padding: 9px 12px;
+        font-size: 13px;
+      }
+
+      main {
+        padding: 58px 18px;
+      }
+
+      .page-heading {
+        margin-bottom: 36px;
       }
 
       .policy-card {
-        padding: 28px 22px;
-        border-radius: 18px;
+        padding: 30px 22px;
+        border-radius: 19px;
+      }
+
+      .policy-card section {
+        margin-bottom: 32px;
       }
 
       .policy-card h2 {
@@ -190,6 +319,17 @@
         text-align: center;
       }
     }
+
+    @media (max-width: 390px) {
+      .logo {
+        font-size: 23px;
+      }
+
+      .home-link {
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+    }
   </style>
 </head>
 
@@ -197,31 +337,45 @@
 
   <header>
     <nav class="navbar">
+
       <a href="index.html" class="logo">
-        BILGE<span>GAMES</span>
+        <span class="logo-white">BILGE</span>
+        <span class="logo-green">GAMES</span>
       </a>
 
       <a href="index.html" class="home-link">
         ← Back to Home
       </a>
+
     </nav>
   </header>
 
   <main>
 
     <div class="page-heading">
-      <span>Legal Information</span>
-      <h1>Privacy Policy</h1>
-      <p>Last updated: August 4, 2026</p>
+
+      <div class="tag">
+        Legal Information
+      </div>
+
+      <h1>
+        Privacy <span>Policy</span>
+      </h1>
+
+      <p>
+        Last updated: August 4, 2026
+      </p>
+
     </div>
 
     <article class="policy-card">
 
       <section>
         <p>
-          BilgeGames develops and publishes mobile games. This Privacy
-          Policy explains what information may be collected when you use
-          our applications, why it is collected, and how it may be processed.
+          BilgeGames develops and publishes mobile games.
+          This Privacy Policy explains what information may be
+          collected when you use our applications, why it is
+          collected, and how it may be processed.
         </p>
       </section>
 
@@ -229,14 +383,14 @@
         <h2>1. Information We Collect</h2>
 
         <p>
-          BilgeGames does not require users to create an account and does
-          not directly request personal information such as names,
-          addresses, phone numbers, or passwords.
+          BilgeGames does not require users to create an account
+          and does not directly request personal information such
+          as names, addresses, phone numbers, or passwords.
         </p>
 
         <p>
-          Our applications and third-party services may automatically
-          collect certain information, including:
+          Our applications and third-party services may
+          automatically collect certain information, including:
         </p>
 
         <ul>
@@ -267,15 +421,15 @@
         <h2>3. Advertising and Third-Party Services</h2>
 
         <p>
-          Our applications may use third-party services, including Google
-          AdMob, to display advertisements.
+          Our applications may use third-party services,
+          including Google AdMob, to display advertisements.
         </p>
 
         <p>
-          These services may collect and process advertising identifiers,
-          IP addresses, device information, application interactions and
-          advertisement interaction data in accordance with their own
-          privacy policies.
+          These services may collect and process advertising
+          identifiers, IP addresses, device information,
+          application interactions and advertisement interaction
+          data in accordance with their own privacy policies.
         </p>
       </section>
 
@@ -283,15 +437,15 @@
         <h2>4. Personalized Advertising and Consent</h2>
 
         <p>
-          Depending on your location and privacy choices, advertisements
-          may be personalized or non-personalized.
+          Depending on your location and privacy choices,
+          advertisements may be personalized or non-personalized.
         </p>
 
         <p>
           Where required, users may be shown a consent form before
-          advertising-related information is processed. Users may also be
-          able to review or change their privacy choices inside the
-          application.
+          advertising-related information is processed. Users may
+          also be able to review or change their privacy choices
+          inside the application.
         </p>
       </section>
 
@@ -299,14 +453,15 @@
         <h2>5. Children’s Privacy</h2>
 
         <p>
-          We do not knowingly request names, email addresses, phone numbers
-          or similar personal information from children.
+          We do not knowingly request names, email addresses,
+          phone numbers or similar personal information from
+          children.
         </p>
 
         <p>
-          If you believe that a child has provided personal information to
-          us, please contact us so that we can investigate and take
-          appropriate action.
+          If you believe that a child has provided personal
+          information to us, please contact us so that we can
+          investigate and take appropriate action.
         </p>
       </section>
 
@@ -314,14 +469,14 @@
         <h2>6. Data Sharing</h2>
 
         <p>
-          Information may be shared with service providers when necessary
-          for advertising, analytics, diagnostics, fraud prevention,
-          security or legal compliance.
+          Information may be shared with service providers when
+          necessary for advertising, analytics, diagnostics,
+          fraud prevention, security or legal compliance.
         </p>
 
         <p>
-          BilgeGames does not sell users’ directly identifiable personal
-          information.
+          BilgeGames does not sell users’ directly identifiable
+          personal information.
         </p>
       </section>
 
@@ -329,14 +484,14 @@
         <h2>7. Data Retention and Deletion</h2>
 
         <p>
-          Information processed by third-party providers may be retained
-          according to their own retention policies.
+          Information processed by third-party providers may be
+          retained according to their own retention policies.
         </p>
 
         <p>
-          You may reset or delete your advertising identifier through your
-          device settings. You may also contact us regarding data directly
-          controlled by BilgeGames.
+          You may reset or delete your advertising identifier
+          through your device settings. You may also contact us
+          regarding data directly controlled by BilgeGames.
         </p>
       </section>
 
@@ -344,14 +499,14 @@
         <h2>8. Data Security</h2>
 
         <p>
-          We take reasonable technical and organizational measures to
-          protect information against unauthorized access, loss, misuse or
-          alteration.
+          We take reasonable technical and organizational measures
+          to protect information against unauthorized access,
+          loss, misuse or alteration.
         </p>
 
         <p>
-          However, no electronic transmission or storage system can be
-          guaranteed to be completely secure.
+          However, no electronic transmission or storage system
+          can be guaranteed to be completely secure.
         </p>
       </section>
 
@@ -360,8 +515,9 @@
 
         <p>
           We may update this Privacy Policy when our applications,
-          third-party services or legal obligations change. Updates will be
-          published on this page together with a revised update date.
+          third-party services or legal obligations change.
+          Updates will be published on this page together with a
+          revised update date.
         </p>
       </section>
 
@@ -372,7 +528,10 @@
           For privacy questions, requests or concerns, contact:
         </p>
 
-        <a class="email" href="mailto:oogaamess@gmail.com">
+        <a
+          class="email"
+          href="mailto:oogaamess@gmail.com"
+        >
           oogaamess@gmail.com
         </a>
       </section>
@@ -383,8 +542,15 @@
 
   <footer>
     <div class="footer-content">
-      <div>© 2026 BilgeGames. All rights reserved.</div>
-      <a href="index.html">Back to Home</a>
+
+      <div>
+        © 2026 BilgeGames. All rights reserved.
+      </div>
+
+      <a href="index.html">
+        Back to Home
+      </a>
+
     </div>
   </footer>
 
