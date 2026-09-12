@@ -1,623 +1,2599 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#08115c" />
-  <meta name="description" content="BilgeGames tarafından geliştirilen mobil puzzle, arcade ve block oyunlarını keşfedin." />
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta name="theme-color" content="#07105a">
+
+  <meta
+    name="description"
+    content="BilgeGames tarafından geliştirilen mobil puzzle, arcade ve casual oyunları keşfedin."
+  >
+
   <title>BilgeGames | Mobile Games</title>
+
   <style>
-    :root{
-      --bg-0:#03083a;
-      --bg-1:#07105a;
-      --bg-2:#101d93;
-      --bg-3:#0a136b;
-      --surface:rgba(8,16,83,.68);
-      --surface-strong:rgba(7,14,65,.88);
-      --surface-soft:rgba(255,255,255,.055);
-      --line:rgba(255,255,255,.11);
-      --text:#fff;
-      --muted:#b9c3ef;
-      --green:#44ff2f;
-      --green-soft:#9aff8a;
-      --shadow:0 24px 70px rgba(0,0,0,.30);
-      --radius:28px;
+
+    :root {
+      --bg-top: #111d91;
+      --bg-main: #07105a;
+      --bg-dark: #02062f;
+
+      --green: #35ff28;
+      --green-soft: #8cff7f;
+
+      --white: #ffffff;
+      --muted: #b9c3ef;
+
+      --card:
+        rgba(8, 16, 83, 0.72);
+
+      --border:
+        rgba(255, 255, 255, 0.11);
+
+      --shadow:
+        0 25px 70px rgba(0, 0, 0, 0.30);
     }
 
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{
-      min-height:100vh;
-      color:var(--text);
-      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+
+    body {
+      min-height: 100vh;
+
+      font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      color: var(--white);
+
       background:
-        radial-gradient(circle at 50% 11%, rgba(42,60,226,.42) 0, rgba(22,34,154,.26) 25%, transparent 53%),
-        radial-gradient(circle at 18% 56%, rgba(21,42,188,.20) 0, transparent 34%),
-        radial-gradient(circle at 80% 76%, rgba(22,38,170,.18) 0, transparent 38%),
-        linear-gradient(180deg,var(--bg-1) 0%,var(--bg-0) 46%,#02062f 100%);
-      background-attachment:fixed;
-      overflow-x:hidden;
+        radial-gradient(
+          circle at 50% 6%,
+          rgba(55, 72, 240, 0.36),
+          transparent 34%
+        ),
+
+        radial-gradient(
+          circle at 10% 45%,
+          rgba(30, 50, 210, 0.17),
+          transparent 35%
+        ),
+
+        radial-gradient(
+          circle at 90% 65%,
+          rgba(30, 45, 190, 0.15),
+          transparent 35%
+        ),
+
+        linear-gradient(
+          180deg,
+          #111d91 0%,
+          #07105a 22%,
+          #03083a 57%,
+          #02062f 100%
+        );
+
+      background-attachment: fixed;
+
+      overflow-x: hidden;
     }
 
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      opacity:.10;
+
+    body::before {
+      content: "";
+
+      position: fixed;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      opacity: 0.08;
+
       background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.025) 1px, transparent 1px);
-      background-size:72px 72px;
-      mask-image:linear-gradient(to bottom,transparent,black 18%,black 80%,transparent);
+        linear-gradient(
+          rgba(255, 255, 255, 0.03) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.03) 1px,
+          transparent 1px
+        );
+
+      background-size: 72px 72px;
     }
 
-    a{color:inherit;text-decoration:none}
-    img{display:block;max-width:100%}
-    button{font:inherit}
 
-    .container{width:min(1180px,calc(100% - 40px));margin-inline:auto}
-
-    header{
-      position:fixed;
-      inset:0 0 auto 0;
-      z-index:50;
-      transition:.25s ease;
-    }
-    header.scrolled{
-      background:rgba(3,8,52,.78);
-      backdrop-filter:blur(18px);
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
-    .nav{
-      min-height:84px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:28px;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    .brand{
-      position:relative;
-      width:176px;
-      height:60px;
-      overflow:hidden;
-      border-radius:10px;
-      flex:0 0 auto;
-      background-image:url('bilgegames-logo.png');
-      background-size:176px auto;
-      background-repeat:no-repeat;
-      background-position:center 49.5%;
+
+    img {
+      display: block;
+      max-width: 100%;
     }
 
-    .nav-links{display:flex;align-items:center;gap:30px;color:#dce2ff;font-size:14px;font-weight:700}
-    .nav-links a{position:relative;padding:10px 0;transition:.2s ease}
-    .nav-links a::after{
-      content:"";
-      position:absolute;
-      left:0;right:100%;bottom:3px;height:2px;
-      background:var(--green);
-      transition:.2s ease;
-    }
-    .nav-links a:hover{color:#fff}
-    .nav-links a:hover::after{right:0}
 
-    .store-nav{
-      display:inline-flex!important;
-      align-items:center;
-      gap:8px;
-      padding:11px 16px!important;
-      border:1px solid rgba(68,255,47,.35);
-      border-radius:999px;
-      background:rgba(68,255,47,.08);
-      color:#fff!important;
-    }
-    .store-nav::after{display:none!important}
-
-    .lang-switch{display:flex;align-items:center;gap:5px;padding:4px;border:1px solid rgba(255,255,255,.10);border-radius:999px;background:rgba(255,255,255,.035)}
-    .lang-switch button{border:0;background:transparent;color:#8f9bd0;font-size:11px;font-weight:900;letter-spacing:.08em;padding:7px 9px;border-radius:999px;cursor:pointer}
-    .lang-switch button.active{background:#fff;color:#071052}
-
-    .menu-toggle{display:none;border:0;background:none;color:#fff;font-size:28px;cursor:pointer}
-
-    .hero{
-      min-height:100svh;
-      display:grid;
-      place-items:center;
-      position:relative;
-      padding:128px 0 90px;
-      isolation:isolate;
-    }
-    .hero::after{
-      content:"";
-      position:absolute;
-      width:min(760px,74vw);
-      aspect-ratio:1;
-      border-radius:50%;
-      background:radial-gradient(circle,rgba(38,55,224,.24),rgba(38,55,224,.07) 45%,transparent 70%);
-      filter:blur(2px);
-      z-index:-1;
-    }
-    .hero-inner{text-align:center;max-width:940px;margin:auto}
-
-    .hero-logo{
-      width:min(580px,92vw);
-      height:265px;
-      margin:0 auto -4px;
-      background-image:url('bilgegames-logo.png');
-      background-size:100% auto;
-      background-repeat:no-repeat;
-      background-position:center 49.4%;
-      filter:drop-shadow(0 18px 28px rgba(0,0,0,.18));
+    button {
+      font: inherit;
     }
 
-    .hero-kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:9px;
-      padding:9px 15px;
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:999px;
-      background:rgba(255,255,255,.045);
-      color:#d7ddff;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-    }
-    .hero-kicker i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 16px rgba(68,255,47,.9)}
 
-    .hero h1{
-      margin-top:26px;
-      font-size:clamp(46px,6.6vw,78px);
-      line-height:.98;
-      letter-spacing:-.055em;
-      font-weight:900;
-    }
-    .hero h1 span{color:#fff}
-    .hero p{
-      max-width:720px;
-      margin:24px auto 0;
-      color:var(--muted);
-      font-size:clamp(16px,2vw,19px);
-      line-height:1.7;
-    }
-    .hero-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:34px}
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:9px;
-      min-height:52px;
-      padding:0 22px;
-      border-radius:14px;
-      border:1px solid transparent;
-      font-weight:850;
-      transition:.22s ease;
-    }
-    .btn:hover{transform:translateY(-3px)}
-    .btn-primary{background:var(--green);color:#071126;box-shadow:0 14px 34px rgba(68,255,47,.18)}
-    .btn-secondary{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.13);color:#fff}
+    .container {
+      width: min(
+        1180px,
+        calc(100% - 40px)
+      );
 
-    .scroll-cue{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);color:#8290d0;font-size:11px;letter-spacing:.17em;text-transform:uppercase}
+      margin: auto;
+    }
 
-    section{padding:106px 0}
-    .section-head{display:flex;align-items:end;justify-content:space-between;gap:28px;margin-bottom:44px}
-    .eyebrow{color:var(--green-soft);font-size:12px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;margin-bottom:11px}
-    .section-head h2,.about-copy h2,.contact h2{font-size:clamp(38px,5vw,60px);letter-spacing:-.045em;line-height:1.02}
-    .section-head p{max-width:510px;color:var(--muted);line-height:1.7}
 
-    .games-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
-    .game-card.featured{grid-column:1/-1;min-height:300px;padding:34px}
-    .game-card.featured .icon-wrap{width:132px;height:132px;flex-basis:132px;border-radius:30px}
-    .game-card.featured h3{font-size:38px}
-    .game-card.featured p{max-width:600px;font-size:16px}
-    .game-card.featured .game-top{align-items:center}
-    .game-card{
-      position:relative;
-      min-height:260px;
-      overflow:hidden;
-      padding:28px;
-      border:1px solid var(--line);
-      border-radius:var(--radius);
+
+    /* ==========================
+       HEADER
+    ========================== */
+
+
+    header {
+      position: fixed;
+
+      top: 0;
+      left: 0;
+      right: 0;
+
+      z-index: 100;
+
+      transition: 0.25s;
+    }
+
+
+    header.scrolled {
       background:
-        linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.025) 45%,rgba(255,255,255,.018)),
-        var(--surface);
-      backdrop-filter:blur(16px);
-      box-shadow:var(--shadow);
-      transition:.26s ease;
+        rgba(3, 8, 52, 0.86);
+
+      backdrop-filter:
+        blur(18px);
+
+      border-bottom:
+        1px solid rgba(255, 255, 255, 0.08);
     }
-    .game-card::before{
-      content:"";
-      position:absolute;
-      width:250px;height:250px;
-      right:-90px;top:-110px;
-      border-radius:50%;
-      background:radial-gradient(circle,rgba(43,63,230,.30),transparent 67%);
-      transition:.3s ease;
+
+
+    .navbar {
+      min-height: 86px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 20px;
     }
-    .game-card:hover{transform:translateY(-7px);border-color:rgba(68,255,47,.30)}
-    .game-card:hover::before{transform:scale(1.14)}
 
-    .game-top{display:flex;gap:22px;align-items:flex-start;position:relative;z-index:1}
-    .icon-wrap{
-      width:104px;height:104px;
-      flex:0 0 104px;
-      border-radius:24px;
-      overflow:hidden;
-      position:relative;
-      display:grid;
-      place-items:center;
-      border:1px solid rgba(255,255,255,.13);
-      background:linear-gradient(145deg,#17298e,#091352);
-      box-shadow:0 16px 35px rgba(0,0,0,.23);
+
+    .header-logo {
+      width: 170px;
+
+      display: flex;
+
+      align-items: center;
     }
-    .icon-fallback{font-size:38px;font-weight:950;color:#fff;letter-spacing:-.06em}
-    .icon-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit}
 
-    .game-meta{padding-top:4px;min-width:0}
-    .game-type{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#9ca8df;font-weight:800}
-    .game-card h3{font-size:29px;letter-spacing:-.03em;margin-top:5px}
-    .game-card p{color:#bcc5ee;line-height:1.62;margin-top:12px;max-width:390px}
-    .game-bottom{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:27px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08)}
-    .play-link{display:inline-flex;align-items:center;gap:8px;color:#fff;font-size:14px;font-weight:900}
-    .play-link span{color:var(--green)}
-    .arrow{font-size:20px;transition:.2s ease}
-    .play-link:hover .arrow{transform:translateX(4px)}
-    .available{color:#7f8bc5;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
 
-    .studio-strip{
-      border-block:1px solid rgba(255,255,255,.065);
-      background:rgba(3,7,44,.28);
-      overflow:hidden;
-      padding:19px 0;
+    .header-logo img {
+      width: 100%;
+      height: auto;
     }
-    .marquee{white-space:nowrap;color:#8c98d1;font-size:13px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;animation:marquee 28s linear infinite}
-    .marquee b{color:#fff;margin:0 24px}
-    .marquee em{color:var(--green);font-style:normal;margin:0 24px}
-    @keyframes marquee{to{transform:translateX(-50%)}}
 
-    .about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
-    .about-copy p{color:var(--muted);font-size:17px;line-height:1.8;margin-top:23px;max-width:650px}
-    .about-points{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-    .point{padding:22px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.04)}
-    .point strong{display:block;font-size:17px;letter-spacing:-.01em;color:#fff}
-    .point span{display:block;margin-top:8px;color:#929fd7;font-size:13px;line-height:1.55}
 
-    .contact-card{
-      padding:56px;
-      border:1px solid rgba(255,255,255,.11);
-      border-radius:34px;
-      text-align:center;
+    .header-right {
+      display: flex;
+
+      align-items: center;
+
+      gap: 18px;
+    }
+
+
+    .nav-links {
+      display: flex;
+
+      align-items: center;
+
+      gap: 26px;
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      color: #dce2ff;
+    }
+
+
+    .nav-links a {
+      transition: 0.2s;
+    }
+
+
+    .nav-links a:hover {
+      color: var(--green);
+    }
+
+
+
+    /* LANGUAGE */
+
+
+    .language {
+      display: flex;
+
+      align-items: center;
+
+      gap: 3px;
+
+      padding: 4px;
+
+      border:
+        1px solid rgba(255, 255, 255, 0.12);
+
+      border-radius: 100px;
+
       background:
-        radial-gradient(circle at 50% 0%,rgba(34,53,220,.30),transparent 50%),
-        rgba(6,12,70,.70);
-      box-shadow:var(--shadow);
+        rgba(255, 255, 255, 0.035);
     }
-    .contact p{max-width:570px;margin:18px auto 28px;color:var(--muted);line-height:1.7}
 
-    footer{padding:34px 0 42px;border-top:1px solid rgba(255,255,255,.08);color:#8190c9;font-size:13px}
-    .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
-    .footer-links{display:flex;gap:22px;flex-wrap:wrap}
-    .footer-links a:hover{color:#fff}
 
-    .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
-    .reveal.visible{opacity:1;transform:none}
+    .language button {
+      border: 0;
 
-    @media(max-width:820px){
-      .container{width:min(100% - 28px,1180px)}
-      .nav{min-height:74px}
-      .brand{width:142px;height:50px;background-size:142px auto}
-      .menu-toggle{display:block}
-      .lang-switch{margin-left:auto}
-      .nav-links{
-        position:absolute;
-        top:74px;left:14px;right:14px;
-        display:none;
-        flex-direction:column;
-        align-items:stretch;
-        gap:4px;
-        padding:14px;
-        background:rgba(3,8,52,.96);
-        border:1px solid rgba(255,255,255,.1);
-        border-radius:18px;
-        backdrop-filter:blur(20px);
+      background: transparent;
+
+      color: #9ca8dc;
+
+      padding: 8px 11px;
+
+      border-radius: 100px;
+
+      font-size: 12px;
+
+      font-weight: 900;
+
+      cursor: pointer;
+    }
+
+
+    .language button.active {
+      background: white;
+
+      color: #071052;
+    }
+
+
+
+    /* MOBILE MENU */
+
+
+    .menu-button {
+      display: none;
+
+      border: 0;
+
+      background: transparent;
+
+      color: white;
+
+      font-size: 32px;
+
+      cursor: pointer;
+    }
+
+
+
+    /* ==========================
+       HERO
+    ========================== */
+
+
+    .hero {
+      min-height: 100svh;
+
+      padding:
+        135px 0 100px;
+
+      display: flex;
+
+      align-items: center;
+
+      text-align: center;
+    }
+
+
+    .hero-inner {
+      width: 100%;
+
+      max-width: 940px;
+
+      margin: auto;
+    }
+
+
+    /*
+       LOGO ARTIK ŞEFFAF.
+       ARKASINDA KUTU YOK.
+       DİREKT SİTE BACKGROUND'U GÖRÜNÜR.
+    */
+
+
+    .hero-logo {
+      width:
+        min(570px, 92vw);
+
+      margin:
+        0 auto 35px;
+    }
+
+
+    .hero-logo img {
+      width: 100%;
+
+      height: auto;
+
+      filter:
+        drop-shadow(
+          0 20px 30px
+          rgba(0, 0, 0, 0.16)
+        );
+    }
+
+
+    .studio-label {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      padding:
+        10px 18px;
+
+      border:
+        1px solid rgba(255, 255, 255, 0.13);
+
+      border-radius: 100px;
+
+      background:
+        rgba(255, 255, 255, 0.035);
+
+      color: #dfe4ff;
+
+      font-size: 12px;
+
+      font-weight: 800;
+
+      letter-spacing: 0.15em;
+    }
+
+
+    .studio-label .dot {
+      width: 8px;
+      height: 8px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      box-shadow:
+        0 0 18px
+        rgba(53, 255, 40, 0.85);
+    }
+
+
+    .hero h1 {
+      margin-top: 31px;
+
+      font-size:
+        clamp(
+          46px,
+          7vw,
+          82px
+        );
+
+      line-height: 0.99;
+
+      letter-spacing: -0.055em;
+
+      font-weight: 900;
+    }
+
+
+    .hero p {
+      max-width: 720px;
+
+      margin:
+        27px auto 0;
+
+      color: var(--muted);
+
+      font-size:
+        clamp(
+          16px,
+          2vw,
+          19px
+        );
+
+      line-height: 1.75;
+    }
+
+
+    .hero-buttons {
+      margin-top: 38px;
+
+      display: flex;
+
+      justify-content: center;
+
+      gap: 14px;
+
+      flex-wrap: wrap;
+    }
+
+
+    .button {
+      min-height: 55px;
+
+      padding:
+        0 25px;
+
+      border-radius: 16px;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 9px;
+
+      font-weight: 900;
+
+      transition: 0.22s;
+
+      border:
+        1px solid transparent;
+    }
+
+
+    .button:hover {
+      transform:
+        translateY(-3px);
+    }
+
+
+    .button-primary {
+      background:
+        var(--green);
+
+      color:
+        #071126;
+
+      box-shadow:
+        0 15px 40px
+        rgba(53, 255, 40, 0.17);
+    }
+
+
+    .button-secondary {
+      color: white;
+
+      background:
+        rgba(255, 255, 255, 0.045);
+
+      border-color:
+        rgba(255, 255, 255, 0.14);
+    }
+
+
+
+    /* ==========================
+       SECTIONS
+    ========================== */
+
+
+    section {
+      padding:
+        105px 0;
+    }
+
+
+    .section-header {
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: flex-end;
+
+      gap: 30px;
+
+      margin-bottom: 47px;
+    }
+
+
+    .eyebrow {
+      color:
+        var(--green-soft);
+
+      font-size: 12px;
+
+      font-weight: 900;
+
+      letter-spacing: 0.18em;
+
+      text-transform: uppercase;
+
+      margin-bottom: 12px;
+    }
+
+
+    .section-header h2,
+    .studio-text h2,
+    .contact h2 {
+
+      font-size:
+        clamp(
+          40px,
+          5vw,
+          62px
+        );
+
+      line-height: 1;
+
+      letter-spacing: -0.045em;
+    }
+
+
+    .section-header p {
+      max-width: 520px;
+
+      color:
+        var(--muted);
+
+      line-height: 1.7;
+    }
+
+
+
+    /* ==========================
+       GAMES
+    ========================== */
+
+
+    .games-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(0, 1fr)
+        );
+
+      gap: 21px;
+    }
+
+
+    .game-card {
+      position: relative;
+
+      padding:
+        29px;
+
+      border-radius:
+        28px;
+
+      overflow: hidden;
+
+      border:
+        1px solid var(--border);
+
+      background:
+
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.075),
+          rgba(255, 255, 255, 0.018)
+        ),
+
+        var(--card);
+
+      backdrop-filter:
+        blur(15px);
+
+      box-shadow:
+        var(--shadow);
+
+      transition:
+        0.25s;
+    }
+
+
+    .game-card:hover {
+      transform:
+        translateY(-6px);
+
+      border-color:
+        rgba(53, 255, 40, 0.30);
+    }
+
+
+    .game-card.featured {
+      grid-column:
+        1 / -1;
+
+      padding: 35px;
+    }
+
+
+    .game-main {
+      display: flex;
+
+      align-items: flex-start;
+
+      gap: 23px;
+    }
+
+
+    .game-card.featured
+    .game-main {
+
+      align-items: center;
+    }
+
+
+    .game-icon {
+      width: 105px;
+
+      height: 105px;
+
+      flex:
+        0 0 105px;
+
+      overflow: hidden;
+
+      border-radius:
+        24px;
+
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.14);
+
+      box-shadow:
+        0 16px 35px
+        rgba(0, 0, 0, 0.24);
+    }
+
+
+    .featured
+    .game-icon {
+
+      width: 135px;
+
+      height: 135px;
+
+      flex-basis:
+        135px;
+
+      border-radius:
+        30px;
+    }
+
+
+    .game-icon img {
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+    }
+
+
+    .game-info {
+      flex: 1;
+    }
+
+
+    .game-type {
+      font-size: 11px;
+
+      font-weight: 800;
+
+      letter-spacing: 0.15em;
+
+      text-transform: uppercase;
+
+      color: #a2ace0;
+    }
+
+
+    .game-info h3 {
+      margin-top: 6px;
+
+      font-size: 29px;
+
+      letter-spacing: -0.03em;
+    }
+
+
+    .featured
+    .game-info h3 {
+
+      font-size: 39px;
+    }
+
+
+    .game-info p {
+      margin-top: 12px;
+
+      color: #c0c8ed;
+
+      line-height: 1.65;
+
+      max-width: 580px;
+    }
+
+
+    .game-footer {
+      margin-top: 25px;
+
+      padding-top: 20px;
+
+      border-top:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 20px;
+    }
+
+
+    .play-link {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 9px;
+
+      color:
+        var(--green);
+
+      font-size: 14px;
+
+      font-weight: 900;
+    }
+
+
+    .platform {
+      color: #8592c9;
+
+      font-size: 11px;
+
+      font-weight: 800;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.08em;
+    }
+
+
+
+    /* ==========================
+       STUDIO
+    ========================== */
+
+
+    .studio-grid {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 55px;
+
+      align-items: center;
+    }
+
+
+    .studio-text p {
+      margin-top: 24px;
+
+      max-width: 620px;
+
+      color:
+        var(--muted);
+
+      font-size: 17px;
+
+      line-height: 1.8;
+    }
+
+
+    .principles {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 15px;
+    }
+
+
+    .principle {
+      padding: 23px;
+
+      min-height: 150px;
+
+      border-radius:
+        21px;
+
+      border:
+        1px solid var(--border);
+
+      background:
+        rgba(255, 255, 255, 0.035);
+    }
+
+
+    .principle strong {
+      display: block;
+
+      font-size: 18px;
+    }
+
+
+    .principle span {
+      display: block;
+
+      margin-top: 9px;
+
+      color: #9ca8dc;
+
+      font-size: 13px;
+
+      line-height: 1.55;
+    }
+
+
+
+    /* ==========================
+       CONTACT
+    ========================== */
+
+
+    .contact-card {
+      padding:
+        62px 30px;
+
+      text-align: center;
+
+      border-radius:
+        34px;
+
+      border:
+        1px solid var(--border);
+
+      background:
+
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(42, 60, 226, 0.28),
+          transparent 55%
+        ),
+
+        rgba(6, 12, 70, 0.72);
+
+      box-shadow:
+        var(--shadow);
+    }
+
+
+    .contact-card p {
+      max-width: 580px;
+
+      margin:
+        20px auto 30px;
+
+      color:
+        var(--muted);
+
+      line-height: 1.7;
+    }
+
+
+
+    /* ==========================
+       FOOTER
+    ========================== */
+
+
+    footer {
+      padding:
+        35px 0 45px;
+
+      border-top:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
+      color:
+        #8793c8;
+
+      font-size:
+        13px;
+    }
+
+
+    .footer-inner {
+      display: flex;
+
+      justify-content:
+        space-between;
+
+      align-items: center;
+
+      gap: 20px;
+
+      flex-wrap: wrap;
+    }
+
+
+    .footer-links {
+      display: flex;
+
+      gap: 22px;
+
+      flex-wrap: wrap;
+    }
+
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+
+
+    /* ==========================
+       ANIMATION
+    ========================== */
+
+
+    .reveal {
+      opacity: 0;
+
+      transform:
+        translateY(18px);
+
+      transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+    }
+
+
+    .reveal.visible {
+      opacity: 1;
+
+      transform: none;
+    }
+
+
+
+    /* ==========================
+       MOBILE
+    ========================== */
+
+
+    @media (
+      max-width: 820px
+    ) {
+
+      .container {
+        width:
+          calc(100% - 30px);
       }
-      .nav-links.open{display:flex}
-      .nav-links a{padding:13px 12px}
-      .store-nav{border-radius:12px}
-      .hero{padding-top:105px;min-height:94svh}
-      .hero-logo{width:min(460px,96vw);height:205px}
-      .hero h1{font-size:clamp(43px,12vw,68px)}
-      section{padding:82px 0}
-      .section-head{display:block}
-      .section-head p{margin-top:18px}
-      .games-grid{grid-template-columns:1fr}
-      .about-grid{grid-template-columns:1fr}
-      .contact-card{padding:40px 22px}
+
+
+      .navbar {
+        min-height: 82px;
+      }
+
+
+      .header-logo {
+        width: 155px;
+      }
+
+
+      .nav-links {
+        display: none;
+
+        position: absolute;
+
+        top: 82px;
+
+        left: 15px;
+        right: 15px;
+
+        padding: 15px;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        background:
+          rgba(3, 8, 52, 0.97);
+
+        border:
+          1px solid
+          rgba(255, 255, 255, 0.11);
+
+        border-radius:
+          18px;
+
+        backdrop-filter:
+          blur(20px);
+      }
+
+
+      .nav-links.open {
+        display: flex;
+      }
+
+
+      .nav-links a {
+        padding:
+          12px 10px;
+      }
+
+
+      .menu-button {
+        display: block;
+      }
+
+
+      .hero {
+        min-height: auto;
+
+        padding:
+          145px 0 90px;
+      }
+
+
+      .hero-logo {
+        width:
+          min(
+            480px,
+            90vw
+          );
+
+        margin-bottom:
+          32px;
+      }
+
+
+      .hero h1 {
+        font-size:
+          clamp(
+            45px,
+            12vw,
+            67px
+          );
+      }
+
+
+      .section-header {
+        display: block;
+      }
+
+
+      .section-header p {
+        margin-top:
+          18px;
+      }
+
+
+      .games-grid {
+        grid-template-columns:
+          1fr;
+      }
+
+
+      .game-card.featured {
+        grid-column:
+          auto;
+      }
+
+
+      .studio-grid {
+        grid-template-columns:
+          1fr;
+      }
+
     }
 
-    @media(max-width:520px){
-      .hero-logo{height:170px}
-      .hero p{font-size:15px}
-      .hero-actions .btn{width:100%}
-      .game-card{padding:22px;min-height:0}
-      .game-card.featured{padding:24px;min-height:0}
-      .game-card.featured .icon-wrap{width:96px;height:96px;flex-basis:96px;border-radius:22px}
-      .game-card.featured h3{font-size:27px}
-      .game-top{gap:16px}
-      .icon-wrap{width:82px;height:82px;flex-basis:82px;border-radius:20px}
-      .icon-fallback{font-size:30px}
-      .game-card h3{font-size:24px}
-      .game-card p{font-size:14px}
-      .game-bottom{align-items:flex-end}
-      .available{max-width:90px;text-align:right;line-height:1.4}
-      .about-points{grid-template-columns:1fr 1fr}
-      .point{padding:18px}
-      .point strong{font-size:25px}
+
+
+    @media (
+      max-width: 520px
+    ) {
+
+      .hero {
+        padding-top:
+          132px;
+      }
+
+
+      .hero-logo {
+        width:
+          88vw;
+      }
+
+
+      .studio-label {
+        font-size:
+          10px;
+
+        letter-spacing:
+          0.12em;
+
+        padding:
+          9px 13px;
+      }
+
+
+      .hero h1 {
+        margin-top:
+          28px;
+      }
+
+
+      .hero p {
+        font-size:
+          16px;
+      }
+
+
+      .hero-buttons {
+        width: 100%;
+      }
+
+
+      .hero-buttons
+      .button {
+
+        width: 100%;
+      }
+
+
+      section {
+        padding:
+          80px 0;
+      }
+
+
+      .game-card,
+      .game-card.featured {
+
+        padding:
+          22px;
+      }
+
+
+      .game-main,
+      .game-card.featured
+      .game-main {
+
+        align-items:
+          flex-start;
+
+        gap:
+          16px;
+      }
+
+
+      .game-icon,
+      .featured
+      .game-icon {
+
+        width:
+          85px;
+
+        height:
+          85px;
+
+        flex-basis:
+          85px;
+
+        border-radius:
+          20px;
+      }
+
+
+      .game-info h3,
+      .featured
+      .game-info h3 {
+
+        font-size:
+          25px;
+      }
+
+
+      .game-info p {
+        font-size:
+          14px;
+      }
+
+
+      .principles {
+        grid-template-columns:
+          1fr;
+      }
+
+
+      .contact-card {
+        padding:
+          45px 22px;
+      }
+
     }
+
   </style>
 </head>
+
+
+
 <body>
-  <header id="siteHeader">
-    <div class="container nav">
-      <a href="#top" class="brand" aria-label="BilgeGames"></a>
-      <div class="lang-switch" aria-label="Language">
-        <button type="button" data-lang="en">EN</button>
-        <button type="button" data-lang="tr">TR</button>
+
+
+  <!-- HEADER -->
+
+
+  <header id="header">
+
+    <div class="container navbar">
+
+
+      <a
+        href="#top"
+        class="header-logo"
+      >
+        <img
+          src="bilgegames-logo-transparent.png"
+          alt="BilgeGames"
+        >
+      </a>
+
+
+      <div class="header-right">
+
+
+        <nav
+          class="nav-links"
+          id="navLinks"
+        >
+
+          <a
+            href="#games"
+            data-i18n="nav_games"
+          >
+            Oyunlar
+          </a>
+
+          <a
+            href="#studio"
+            data-i18n="nav_studio"
+          >
+            Stüdyo
+          </a>
+
+          <a
+            href="#contact"
+            data-i18n="nav_contact"
+          >
+            İletişim
+          </a>
+
+          <a
+            href="https://play.google.com/store/apps/dev?id=8681256721556218113&hl=tr"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Google Play ↗
+          </a>
+
+        </nav>
+
+
+        <div class="language">
+
+          <button
+            data-lang="en"
+          >
+            EN
+          </button>
+
+          <button
+            data-lang="tr"
+          >
+            TR
+          </button>
+
+        </div>
+
+
+        <button
+          class="menu-button"
+          id="menuButton"
+          aria-label="Menü"
+        >
+          ☰
+        </button>
+
+
       </div>
-      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
-      <nav class="nav-links" id="navLinks">
-        <a href="#games" data-i18n="nav_games">Games</a>
-        <a href="#about" data-i18n="nav_studio">Studio</a>
-        <a href="#contact" data-i18n="nav_contact">Contact</a>
-        <a class="store-nav" href="https://play.google.com/store/apps/dev?id=8681256721556218113&hl=en" target="_blank" rel="noopener noreferrer"><span data-i18n="nav_play">Google Play</span> ↗</a>
-      </nav>
+
     </div>
+
   </header>
 
+
+
   <main id="top">
+
+
+    <!-- HERO -->
+
+
     <section class="hero">
+
       <div class="container hero-inner reveal">
-        <div class="hero-logo" role="img" aria-label="Bilge Games logo"></div>
-        <div class="hero-kicker"><i></i> <span data-i18n="hero_kicker">BILGEGAMES · MOBILE GAME STUDIO</span></div>
-        <h1 data-i18n-html="hero_title">Mobile games,<br><span>thoughtfully made.</span></h1>
-        <p data-i18n="hero_text">We craft polished puzzle, arcade and casual experiences with clear mechanics, responsive feel and lasting replay value.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#games" data-i18n="hero_cta">Explore Games ↓</a>
-          <a class="btn btn-secondary" href="https://play.google.com/store/apps/dev?id=8681256721556218113&hl=en" target="_blank" rel="noopener noreferrer"><span data-i18n="hero_store">View on Google Play</span> ↗</a>
+
+
+        <div class="hero-logo">
+
+          <img
+            src="bilgegames-logo-transparent.png"
+            alt="BilgeGames"
+          >
+
         </div>
+
+
+        <div class="studio-label">
+
+          <span class="dot"></span>
+
+          <span data-i18n="hero_label">
+            BILGEGAMES · MOBİL OYUN STÜDYOSU
+          </span>
+
+        </div>
+
+
+        <h1
+          data-i18n-html="hero_title"
+        >
+          Özenle tasarlanan
+          <br>
+          mobil oyunlar.
+        </h1>
+
+
+        <p
+          data-i18n="hero_text"
+        >
+          Net mekanikler, akıcı oynanış ve yüksek
+          tekrar oynanabilirlik odağıyla puzzle,
+          arcade ve casual deneyimler geliştiriyoruz.
+        </p>
+
+
+        <div class="hero-buttons">
+
+          <a
+            href="#games"
+            class="button button-primary"
+            data-i18n="hero_games"
+          >
+            Oyunları Keşfet ↓
+          </a>
+
+
+          <a
+            href="https://play.google.com/store/apps/dev?id=8681256721556218113&hl=tr"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="button button-secondary"
+            data-i18n="hero_store"
+          >
+            Google Play’de Gör ↗
+          </a>
+
+        </div>
+
       </div>
-      <div class="scroll-cue" data-i18n="scroll">Scroll to explore</div>
+
     </section>
 
-    <div class="studio-strip" aria-hidden="true">
-      <div class="marquee">BILGEGAMES <em>•</em> PUZZLE <b>•</b> ARCADE <em>•</em> CASUAL <b>•</b> MOBILE GAMES <em>•</em> BILGEGAMES <b>•</b> PUZZLE <em>•</em> ARCADE <b>•</b> CASUAL <em>•</em> MOBILE GAMES <b>•</b> BILGEGAMES <em>•</em> PUZZLE <b>•</b> ARCADE <em>•</em> CASUAL <b>•</b> MOBILE GAMES <em>•</em></div>
-    </div>
+
+
+    <!-- GAMES -->
+
 
     <section id="games">
+
       <div class="container">
-        <div class="section-head reveal">
+
+
+        <div class="section-header reveal">
+
           <div>
-            <div class="eyebrow" data-i18n="games_eyebrow">Selected Work</div>
-            <h2 data-i18n="games_title">Our Games</h2>
+
+            <div
+              class="eyebrow"
+              data-i18n="games_label"
+            >
+              OYUNLARIMIZ
+            </div>
+
+            <h2
+              data-i18n="games_title"
+            >
+              Oyunlarımız
+            </h2>
+
           </div>
-          <p data-i18n="games_text">Explore the mobile games published by BilgeGames.</p>
+
+
+          <p
+            data-i18n="games_text"
+          >
+            BilgeGames tarafından yayınlanan
+            mobil oyunları keşfet.
+          </p>
+
         </div>
+
+
 
         <div class="games-grid">
-          <article class="game-card featured reveal">
-            <div class="game-top">
-              <div class="icon-wrap">
-                <span class="icon-fallback">N</span>
-                <img src="findthen.png" alt="FindTheN oyun ikonu" onerror="this.style.display='none'">
+
+
+          <!-- FINDTHEN -->
+
+
+          <article
+            class="game-card featured reveal"
+          >
+
+            <div class="game-main">
+
+
+              <div class="game-icon">
+
+                <img
+                  src="findthen.png"
+                  alt="FindTheN"
+                >
+
               </div>
-              <div class="game-meta">
-                <div class="game-type" data-i18n="find_type">Puzzle · Focus</div>
-                <h3>FindTheN</h3>
-                <p data-i18n="find_desc">Spot the different number hidden in the grid and put your focus, speed and reflexes to the test.</p>
+
+
+              <div class="game-info">
+
+                <div
+                  class="game-type"
+                  data-i18n="find_type"
+                >
+                  PUZZLE · DİKKAT
+                </div>
+
+                <h3>
+                  FindTheN
+                </h3>
+
+                <p
+                  data-i18n="find_desc"
+                >
+                  Gridin içinde gizlenen farklı
+                  sayıyı bul; dikkatini, hızını
+                  ve reflekslerini test et.
+                </p>
+
               </div>
+
             </div>
-            <div class="game-bottom">
-              <a class="play-link" href="https://play.google.com/store/apps/details?id=com.findthen" target="_blank" rel="noopener noreferrer"><span data-i18n="google_play">Google Play</span><span class="arrow">→</span></a>
-              <div class="available">Android</div>
+
+
+            <div class="game-footer">
+
+              <a
+                class="play-link"
+                href="https://play.google.com/store/apps/details?id=com.findthen"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Google Play →
+              </a>
+
+              <span class="platform">
+                Android
+              </span>
+
             </div>
+
           </article>
 
-          <article class="game-card reveal">
-            <div class="game-top">
-              <div class="icon-wrap">
-                <span class="icon-fallback">M</span>
-                <img src="meridian.png" alt="Meridian oyun ikonu" onerror="this.style.display='none'">
-              </div>
-              <div class="game-meta">
-                <div class="game-type" data-i18n="meridian_type">Arcade · Reflex</div>
-                <h3>Meridian</h3>
-                <p data-i18n="meridian_desc">Control gravity, find the rhythm and move through a precise one-touch arcade challenge.</p>
-              </div>
-            </div>
-            <div class="game-bottom">
-              <a class="play-link" href="https://play.google.com/store/apps/details?id=com.symmetrydash" target="_blank" rel="noopener noreferrer"><span data-i18n="google_play">Google Play</span><span class="arrow">→</span></a>
-              <div class="available">Android</div>
-            </div>
-          </article>
+
+
+          <!-- MERIDIAN -->
+
 
           <article class="game-card reveal">
-            <div class="game-top">
-              <div class="icon-wrap">
-                <span class="icon-fallback">R</span>
-                <img src="rectangle.png" alt="Rectangle oyun ikonu" onerror="this.style.display='none'">
+
+            <div class="game-main">
+
+
+              <div class="game-icon">
+
+                <img
+                  src="meridian.png"
+                  alt="Meridian"
+                >
+
               </div>
-              <div class="game-meta">
-                <div class="game-type" data-i18n="rectangle_type">Puzzle · Reflex</div>
-                <h3>Rectangle</h3>
-                <p data-i18n="rectangle_desc">Read the board, react quickly and keep pace as the challenge intensifies.</p>
+
+
+              <div class="game-info">
+
+                <div
+                  class="game-type"
+                  data-i18n="meridian_type"
+                >
+                  ARCADE · REFLEKS
+                </div>
+
+                <h3>
+                  Meridian
+                </h3>
+
+                <p
+                  data-i18n="meridian_desc"
+                >
+                  Yerçekimini kontrol et,
+                  ritmi yakala ve hassas
+                  tek dokunuşlu arcade
+                  mücadelesinde ilerle.
+                </p>
+
               </div>
+
             </div>
-            <div class="game-bottom">
-              <a class="play-link" href="https://play.google.com/store/apps/details?id=com.rectangle" target="_blank" rel="noopener noreferrer"><span data-i18n="google_play">Google Play</span><span class="arrow">→</span></a>
-              <div class="available">Android</div>
+
+
+            <div class="game-footer">
+
+              <a
+                class="play-link"
+                href="https://play.google.com/store/apps/details?id=com.symmetrydash"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Google Play →
+              </a>
+
+              <span class="platform">
+                Android
+              </span>
+
             </div>
+
           </article>
 
-          <article class="game-card reveal">
-            <div class="game-top">
-              <div class="icon-wrap">
-                <span class="icon-fallback">B</span>
-                <img src="blockpuzzle.png" alt="Block Puzzle oyun ikonu" onerror="this.style.display='none'">
-              </div>
-              <div class="game-meta">
-                <div class="game-type" data-i18n="block_type">Puzzle · Strategy</div>
-                <h3>Block Puzzle</h3>
-                <p data-i18n="block_desc">Place colorful blocks, complete rows and columns, and keep the board open as your score climbs.</p>
-              </div>
-            </div>
-            <div class="game-bottom">
-              <a class="play-link" href="https://play.google.com/store/apps/details?id=com.BILGEGAMES.BlockPuzzle&hl=tr" target="_blank" rel="noopener noreferrer"><span data-i18n="google_play">Google Play</span><span class="arrow">→</span></a>
-              <div class="available">Android</div>
-            </div>
-          </article>
+
+
+          <!-- RECTANGLE -->
+
 
           <article class="game-card reveal">
-            <div class="game-top">
-              <div class="icon-wrap">
-                <span class="icon-fallback">↗</span>
-                <img src="hardarrows.png" alt="HardArrows oyun ikonu" onerror="this.style.display='none'">
+
+            <div class="game-main">
+
+
+              <div class="game-icon">
+
+                <img
+                  src="rectangle.png"
+                  alt="Rectangle"
+                >
+
               </div>
-              <div class="game-meta">
-                <div class="game-type" data-i18n="arrows_type">Puzzle · Logic</div>
-                <h3>HardArrows</h3>
-                <p data-i18n="arrows_desc">Find the right order, release every arrow in its direction and clear the board through careful planning.</p>
+
+
+              <div class="game-info">
+
+                <div
+                  class="game-type"
+                  data-i18n="rectangle_type"
+                >
+                  PUZZLE · REFLEKS
+                </div>
+
+                <h3>
+                  Rectangle
+                </h3>
+
+                <p
+                  data-i18n="rectangle_desc"
+                >
+                  Tahtayı oku, doğru anda
+                  tepki ver ve giderek
+                  hızlanan mücadeleye
+                  ayak uydur.
+                </p>
+
               </div>
+
             </div>
-            <div class="game-bottom">
-              <a class="play-link" href="https://play.google.com/store/apps/details?id=com.bilgegamesarrow" target="_blank" rel="noopener noreferrer"><span data-i18n="google_play">Google Play</span><span class="arrow">→</span></a>
-              <div class="available">Android</div>
+
+
+            <div class="game-footer">
+
+              <a
+                class="play-link"
+                href="https://play.google.com/store/apps/details?id=com.rectangle"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Google Play →
+              </a>
+
+              <span class="platform">
+                Android
+              </span>
+
             </div>
+
           </article>
+
+
+
+          <!-- BLOCK PUZZLE -->
+
+
+          <article class="game-card reveal">
+
+            <div class="game-main">
+
+
+              <div class="game-icon">
+
+                <img
+                  src="blockpuzzle.png"
+                  alt="Block Puzzle"
+                >
+
+              </div>
+
+
+              <div class="game-info">
+
+                <div
+                  class="game-type"
+                  data-i18n="block_type"
+                >
+                  PUZZLE · STRATEJİ
+                </div>
+
+                <h3>
+                  Block Puzzle
+                </h3>
+
+                <p
+                  data-i18n="block_desc"
+                >
+                  Renkli blokları yerleştir,
+                  satır ve sütunları tamamla;
+                  skor yükselirken tahtada
+                  alan açmaya devam et.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="game-footer">
+
+              <a
+                class="play-link"
+                href="https://play.google.com/store/apps/details?id=com.BILGEGAMES.BlockPuzzle&hl=tr"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Google Play →
+              </a>
+
+              <span class="platform">
+                Android
+              </span>
+
+            </div>
+
+          </article>
+
+
+
+          <!-- HARD ARROWS -->
+
+
+          <article class="game-card reveal">
+
+            <div class="game-main">
+
+
+              <div class="game-icon">
+
+                <img
+                  src="hardarrows.png"
+                  alt="HardArrows"
+                >
+
+              </div>
+
+
+              <div class="game-info">
+
+                <div
+                  class="game-type"
+                  data-i18n="arrows_type"
+                >
+                  PUZZLE · MANTIK
+                </div>
+
+                <h3>
+                  HardArrows
+                </h3>
+
+                <p
+                  data-i18n="arrows_desc"
+                >
+                  Doğru sırayı bul, okları
+                  yönlerinde çıkar ve dikkatli
+                  planlamayla tahtayı temizle.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="game-footer">
+
+              <a
+                class="play-link"
+                href="https://play.google.com/store/apps/details?id=com.bilgegamesarrow"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Google Play →
+              </a>
+
+              <span class="platform">
+                Android
+              </span>
+
+            </div>
+
+          </article>
+
+
         </div>
+
       </div>
+
     </section>
 
-    <section id="about">
-      <div class="container about-grid">
-        <div class="about-copy reveal">
-          <div class="eyebrow" data-i18n="studio_eyebrow">BilgeGames Studio</div>
-          <h2 data-i18n-html="studio_title">Built around<br>the player.</h2>
-          <p data-i18n="studio_text">We focus on clear mechanics, polished execution and experiences worth returning to. Every project is shaped around usability, feel and replayability.</p>
+
+
+    <!-- STUDIO -->
+
+
+    <section id="studio">
+
+      <div class="container studio-grid">
+
+
+        <div class="studio-text reveal">
+
+          <div
+            class="eyebrow"
+            data-i18n="studio_label"
+          >
+            BILGEGAMES STUDIO
+          </div>
+
+
+          <h2
+            data-i18n-html="studio_title"
+          >
+            Oyuncu odağında
+            <br>
+            geliştiriyoruz.
+          </h2>
+
+
+          <p
+            data-i18n="studio_text"
+          >
+            Net mekaniklere, özenli
+            uygulamaya ve tekrar dönmeye
+            değer deneyimlere odaklanıyoruz.
+            Her proje kullanılabilirlik,
+            oynanış hissi ve tekrar
+            oynanabilirlik etrafında
+            şekillenir.
+          </p>
+
         </div>
-        <div class="about-points reveal">
-          <div class="point"><strong data-i18n="principle_1_title">Player-first design</strong><span data-i18n="principle_1_text">Clear interactions and readable systems from the first touch.</span></div>
-          <div class="point"><strong data-i18n="principle_2_title">Polished execution</strong><span data-i18n="principle_2_text">Responsive feel, purposeful visuals and focused presentation.</span></div>
-          <div class="point"><strong data-i18n="principle_3_title">Replay value</strong><span data-i18n="principle_3_text">Mechanics designed to reward another run, another score, another try.</span></div>
-          <div class="point"><strong data-i18n="principle_4_title">Focused portfolio</strong><span data-i18n="principle_4_text">Puzzle, arcade and casual games with distinct identities.</span></div>
+
+
+
+        <div class="principles reveal">
+
+
+          <div class="principle">
+
+            <strong
+              data-i18n="p1_title"
+            >
+              Oyuncu odaklı tasarım
+            </strong>
+
+            <span
+              data-i18n="p1_text"
+            >
+              İlk dokunuştan itibaren
+              anlaşılır etkileşimler ve
+              okunabilir sistemler.
+            </span>
+
+          </div>
+
+
+          <div class="principle">
+
+            <strong
+              data-i18n="p2_title"
+            >
+              Özenli uygulama
+            </strong>
+
+            <span
+              data-i18n="p2_text"
+            >
+              Akıcı his, tutarlı görsel dil
+              ve odaklı sunum.
+            </span>
+
+          </div>
+
+
+          <div class="principle">
+
+            <strong
+              data-i18n="p3_title"
+            >
+              Tekrar oynanabilirlik
+            </strong>
+
+            <span
+              data-i18n="p3_text"
+            >
+              Bir tur daha, bir skor daha,
+              bir deneme daha isteği
+              oluşturan mekanikler.
+            </span>
+
+          </div>
+
+
+          <div class="principle">
+
+            <strong
+              data-i18n="p4_title"
+            >
+              Odaklı portföy
+            </strong>
+
+            <span
+              data-i18n="p4_text"
+            >
+              Kendine ait kimliği olan
+              puzzle, arcade ve casual
+              oyunlar.
+            </span>
+
+          </div>
+
+
         </div>
+
       </div>
+
     </section>
 
-    <section id="contact" class="contact">
+
+
+    <!-- CONTACT -->
+
+
+    <section
+      id="contact"
+      class="contact"
+    >
+
       <div class="container">
+
         <div class="contact-card reveal">
-          <div class="eyebrow" data-i18n="contact_eyebrow">Contact</div>
-          <h2 data-i18n="contact_title">Let’s talk.</h2>
-          <p data-i18n="contact_text">For game support, business inquiries, press or collaboration opportunities, contact BilgeGames.</p>
-          <a class="btn btn-primary" href="mailto:bilgegamees@gmail.com">bilgegamees@gmail.com</a>
+
+
+          <div
+            class="eyebrow"
+            data-i18n="contact_label"
+          >
+            İLETİŞİM
+          </div>
+
+
+          <h2
+            data-i18n="contact_title"
+          >
+            Konuşalım.
+          </h2>
+
+
+          <p
+            data-i18n="contact_text"
+          >
+            Oyun desteği, iş birlikleri,
+            basın veya diğer iş talepleri
+            için BilgeGames ile iletişime geç.
+          </p>
+
+
+          <a
+            href="mailto:bilgegamees@gmail.com"
+            class="button button-primary"
+          >
+            bilgegamees@gmail.com
+          </a>
+
+
         </div>
+
       </div>
+
     </section>
+
+
   </main>
 
+
+
+  <!-- FOOTER -->
+
+
   <footer>
+
     <div class="container footer-inner">
-      <div><span data-i18n="footer_rights">© 2026 BilgeGames. All rights reserved.</span></div>
-      <div class="footer-links">
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="https://play.google.com/store/apps/dev?id=8681256721556218113&hl=en" target="_blank" rel="noopener noreferrer">Google Play</a>
-        <a href="mailto:bilgegamees@gmail.com" data-i18n="nav_contact">Contact</a>
+
+
+      <div
+        data-i18n="footer"
+      >
+        © 2026 BilgeGames.
+        Tüm hakları saklıdır.
       </div>
+
+
+      <div class="footer-links">
+
+        <a href="privacy-policy.html">
+          Privacy Policy
+        </a>
+
+        <a
+          href="https://play.google.com/store/apps/dev?id=8681256721556218113&hl=tr"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Google Play
+        </a>
+
+        <a
+          href="mailto:bilgegamees@gmail.com"
+        >
+          Contact
+        </a>
+
+      </div>
+
+
     </div>
+
   </footer>
 
+
+
   <script>
+
+
+    /*
+      LANGUAGE
+    */
+
+
     const translations = {
-      en: {
-        nav_games:'Games', nav_studio:'Studio', nav_contact:'Contact', nav_play:'Google Play',
-        hero_kicker:'BILGEGAMES · MOBILE GAME STUDIO',
-        hero_title:'Mobile games,<br><span>thoughtfully made.</span>',
-        hero_text:'We craft polished puzzle, arcade and casual experiences with clear mechanics, responsive feel and lasting replay value.',
-        hero_cta:'Explore Games ↓', hero_store:'View on Google Play', scroll:'Scroll to explore',
-        games_eyebrow:'Selected Work', games_title:'Our Games', games_text:'Explore the mobile games published by BilgeGames.',
-        find_type:'Puzzle · Focus', find_desc:'Spot the different number hidden in the grid and put your focus, speed and reflexes to the test.',
-        meridian_type:'Arcade · Reflex', meridian_desc:'Control gravity, find the rhythm and move through a precise one-touch arcade challenge.',
-        rectangle_type:'Puzzle · Reflex', rectangle_desc:'Read the board, react quickly and keep pace as the challenge intensifies.',
-        block_type:'Puzzle · Strategy', block_desc:'Place colorful blocks, complete rows and columns, and keep the board open as your score climbs.',
-        arrows_type:'Puzzle · Logic', arrows_desc:'Find the right order, release every arrow in its direction and clear the board through careful planning.',
-        google_play:'Google Play',
-        studio_eyebrow:'BilgeGames Studio', studio_title:'Built around<br>the player.', studio_text:'We focus on clear mechanics, polished execution and experiences worth returning to. Every project is shaped around usability, feel and replayability.',
-        principle_1_title:'Player-first design', principle_1_text:'Clear interactions and readable systems from the first touch.',
-        principle_2_title:'Polished execution', principle_2_text:'Responsive feel, purposeful visuals and focused presentation.',
-        principle_3_title:'Replay value', principle_3_text:'Mechanics designed to reward another run, another score, another try.',
-        principle_4_title:'Focused portfolio', principle_4_text:'Puzzle, arcade and casual games with distinct identities.',
-        contact_eyebrow:'Contact', contact_title:'Let’s talk.', contact_text:'For game support, business inquiries, press or collaboration opportunities, contact BilgeGames.',
-        footer_rights:'© 2026 BilgeGames. All rights reserved.'
-      },
+
+
       tr: {
-        nav_games:'Oyunlar', nav_studio:'Stüdyo', nav_contact:'İletişim', nav_play:'Google Play',
-        hero_kicker:'BILGEGAMES · MOBİL OYUN STÜDYOSU',
-        hero_title:'Özenle tasarlanan<br><span>mobil oyunlar.</span>',
-        hero_text:'Net mekanikler, akıcı oynanış ve yüksek tekrar oynanabilirlik odağıyla puzzle, arcade ve casual deneyimler geliştiriyoruz.',
-        hero_cta:'Oyunları Keşfet ↓', hero_store:'Google Play’de Gör', scroll:'Keşfetmek için kaydır',
-        games_eyebrow:'Oyunlarımız', games_title:'Oyunlarımız', games_text:'BilgeGames tarafından yayınlanan mobil oyunları keşfet.',
-        find_type:'Puzzle · Dikkat', find_desc:'Gridin içinde gizlenen farklı sayıyı bul; dikkatini, hızını ve reflekslerini test et.',
-        meridian_type:'Arcade · Refleks', meridian_desc:'Yerçekimini kontrol et, ritmi yakala ve hassas tek dokunuşlu arcade mücadelesinde ilerle.',
-        rectangle_type:'Puzzle · Refleks', rectangle_desc:'Tahtayı oku, doğru anda tepki ver ve giderek hızlanan mücadeleye ayak uydur.',
-        block_type:'Puzzle · Strateji', block_desc:'Renkli blokları yerleştir, satır ve sütunları tamamla; skor yükselirken tahtada alan açmaya devam et.',
-        arrows_type:'Puzzle · Mantık', arrows_desc:'Doğru sırayı bul, okları yönlerinde çıkar ve dikkatli planlamayla tahtayı temizle.',
-        google_play:'Google Play',
-        studio_eyebrow:'BilgeGames Studio', studio_title:'Oyuncu odağında<br>geliştiriyoruz.', studio_text:'Net mekaniklere, özenli uygulamaya ve tekrar dönmeye değer deneyimlere odaklanıyoruz. Her proje kullanılabilirlik, oynanış hissi ve tekrar oynanabilirlik etrafında şekillenir.',
-        principle_1_title:'Oyuncu odaklı tasarım', principle_1_text:'İlk dokunuştan itibaren anlaşılır etkileşimler ve okunabilir sistemler.',
-        principle_2_title:'Özenli uygulama', principle_2_text:'Akıcı his, amaçlı görsel dil ve odaklı sunum.',
-        principle_3_title:'Tekrar oynanabilirlik', principle_3_text:'Bir tur daha, bir skor daha, bir deneme daha isteği oluşturan mekanikler.',
-        principle_4_title:'Odaklı portföy', principle_4_text:'Kendine ait kimliği olan puzzle, arcade ve casual oyunlar.',
-        contact_eyebrow:'İletişim', contact_title:'Konuşalım.', contact_text:'Oyun desteği, iş birlikleri, basın veya diğer iş talepleri için BilgeGames ile iletişime geç.',
-        footer_rights:'© 2026 BilgeGames. Tüm hakları saklıdır.'
+
+        nav_games:
+          "Oyunlar",
+
+        nav_studio:
+          "Stüdyo",
+
+        nav_contact:
+          "İletişim",
+
+
+        hero_label:
+          "BILGEGAMES · MOBİL OYUN STÜDYOSU",
+
+        hero_title:
+          "Özenle tasarlanan<br>mobil oyunlar.",
+
+        hero_text:
+          "Net mekanikler, akıcı oynanış ve yüksek tekrar oynanabilirlik odağıyla puzzle, arcade ve casual deneyimler geliştiriyoruz.",
+
+        hero_games:
+          "Oyunları Keşfet ↓",
+
+        hero_store:
+          "Google Play’de Gör ↗",
+
+
+        games_label:
+          "OYUNLARIMIZ",
+
+        games_title:
+          "Oyunlarımız",
+
+        games_text:
+          "BilgeGames tarafından yayınlanan mobil oyunları keşfet.",
+
+
+        find_type:
+          "PUZZLE · DİKKAT",
+
+        find_desc:
+          "Gridin içinde gizlenen farklı sayıyı bul; dikkatini, hızını ve reflekslerini test et.",
+
+
+        meridian_type:
+          "ARCADE · REFLEKS",
+
+        meridian_desc:
+          "Yerçekimini kontrol et, ritmi yakala ve hassas tek dokunuşlu arcade mücadelesinde ilerle.",
+
+
+        rectangle_type:
+          "PUZZLE · REFLEKS",
+
+        rectangle_desc:
+          "Tahtayı oku, doğru anda tepki ver ve giderek hızlanan mücadeleye ayak uydur.",
+
+
+        block_type:
+          "PUZZLE · STRATEJİ",
+
+        block_desc:
+          "Renkli blokları yerleştir, satır ve sütunları tamamla; skor yükselirken tahtada alan açmaya devam et.",
+
+
+        arrows_type:
+          "PUZZLE · MANTIK",
+
+        arrows_desc:
+          "Doğru sırayı bul, okları yönlerinde çıkar ve dikkatli planlamayla tahtayı temizle.",
+
+
+        studio_label:
+          "BILGEGAMES STUDIO",
+
+        studio_title:
+          "Oyuncu odağında<br>geliştiriyoruz.",
+
+        studio_text:
+          "Net mekaniklere, özenli uygulamaya ve tekrar dönmeye değer deneyimlere odaklanıyoruz. Her proje kullanılabilirlik, oynanış hissi ve tekrar oynanabilirlik etrafında şekillenir.",
+
+
+        p1_title:
+          "Oyuncu odaklı tasarım",
+
+        p1_text:
+          "İlk dokunuştan itibaren anlaşılır etkileşimler ve okunabilir sistemler.",
+
+
+        p2_title:
+          "Özenli uygulama",
+
+        p2_text:
+          "Akıcı his, tutarlı görsel dil ve odaklı sunum.",
+
+
+        p3_title:
+          "Tekrar oynanabilirlik",
+
+        p3_text:
+          "Bir tur daha, bir skor daha, bir deneme daha isteği oluşturan mekanikler.",
+
+
+        p4_title:
+          "Odaklı portföy",
+
+        p4_text:
+          "Kendine ait kimliği olan puzzle, arcade ve casual oyunlar.",
+
+
+        contact_label:
+          "İLETİŞİM",
+
+        contact_title:
+          "Konuşalım.",
+
+        contact_text:
+          "Oyun desteği, iş birlikleri, basın veya diğer iş talepleri için BilgeGames ile iletişime geç.",
+
+
+        footer:
+          "© 2026 BilgeGames. Tüm hakları saklıdır."
+
+      },
+
+
+
+      en: {
+
+        nav_games:
+          "Games",
+
+        nav_studio:
+          "Studio",
+
+        nav_contact:
+          "Contact",
+
+
+        hero_label:
+          "BILGEGAMES · MOBILE GAME STUDIO",
+
+        hero_title:
+          "Mobile games,<br>thoughtfully made.",
+
+        hero_text:
+          "We craft polished puzzle, arcade and casual experiences with clear mechanics, responsive gameplay and lasting replay value.",
+
+        hero_games:
+          "Explore Games ↓",
+
+        hero_store:
+          "View on Google Play ↗",
+
+
+        games_label:
+          "OUR GAMES",
+
+        games_title:
+          "Our Games",
+
+        games_text:
+          "Explore mobile games published by BilgeGames.",
+
+
+        find_type:
+          "PUZZLE · FOCUS",
+
+        find_desc:
+          "Spot the different number hidden in the grid and put your focus, speed and reflexes to the test.",
+
+
+        meridian_type:
+          "ARCADE · REFLEX",
+
+        meridian_desc:
+          "Control gravity, find the rhythm and move through a precise one-touch arcade challenge.",
+
+
+        rectangle_type:
+          "PUZZLE · REFLEX",
+
+        rectangle_desc:
+          "Read the board, react at the right moment and keep pace as the challenge intensifies.",
+
+
+        block_type:
+          "PUZZLE · STRATEGY",
+
+        block_desc:
+          "Place colorful blocks, complete rows and columns and keep the board open as your score climbs.",
+
+
+        arrows_type:
+          "PUZZLE · LOGIC",
+
+        arrows_desc:
+          "Find the right order, release every arrow in its direction and clear the board through careful planning.",
+
+
+        studio_label:
+          "BILGEGAMES STUDIO",
+
+        studio_title:
+          "Built around<br>the player.",
+
+        studio_text:
+          "We focus on clear mechanics, polished execution and experiences worth returning to. Every project is shaped around usability, feel and replayability.",
+
+
+        p1_title:
+          "Player-first design",
+
+        p1_text:
+          "Clear interactions and readable systems from the first touch.",
+
+
+        p2_title:
+          "Polished execution",
+
+        p2_text:
+          "Responsive feel, consistent visual language and focused presentation.",
+
+
+        p3_title:
+          "Replay value",
+
+        p3_text:
+          "Mechanics designed to reward another run, another score and another try.",
+
+
+        p4_title:
+          "Focused portfolio",
+
+        p4_text:
+          "Puzzle, arcade and casual games with distinct identities.",
+
+
+        contact_label:
+          "CONTACT",
+
+        contact_title:
+          "Let’s talk.",
+
+        contact_text:
+          "For game support, business inquiries, press or collaboration opportunities, contact BilgeGames.",
+
+
+        footer:
+          "© 2026 BilgeGames. All rights reserved."
+
       }
+
     };
 
-    const langButtons = document.querySelectorAll('[data-lang]');
-    function setLanguage(lang){
-      const dict = translations[lang] || translations.en;
-      document.documentElement.lang = lang;
-      document.querySelectorAll('[data-i18n]').forEach(el => { const k=el.dataset.i18n; if(dict[k]) el.textContent=dict[k]; });
-      document.querySelectorAll('[data-i18n-html]').forEach(el => { const k=el.dataset.i18nHtml; if(dict[k]) el.innerHTML=dict[k]; });
-      langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.lang===lang));
-      localStorage.setItem('bilgegames-lang', lang);
-    }
-    const savedLang = localStorage.getItem('bilgegames-lang');
-    const initialLang = savedLang || (navigator.language && navigator.language.toLowerCase().startsWith('tr') ? 'tr' : 'en');
-    setLanguage(initialLang);
-    langButtons.forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
 
-    const header = document.getElementById('siteHeader');
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
 
-    const syncHeader = () => header.classList.toggle('scrolled', window.scrollY > 16);
-    syncHeader();
-    addEventListener('scroll', syncHeader, { passive:true });
+    const langButtons =
+      document.querySelectorAll(
+        "[data-lang]"
+      );
 
-    menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
-    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+    function setLanguage(lang) {
+
+      const dictionary =
+        translations[lang];
+
+
+      document.documentElement.lang =
+        lang;
+
+
+      document
+        .querySelectorAll(
+          "[data-i18n]"
+        )
+        .forEach(element => {
+
+          const key =
+            element.dataset.i18n;
+
+          if (
+            dictionary[key]
+          ) {
+
+            element.textContent =
+              dictionary[key];
+
+          }
+
+        });
+
+
+      document
+        .querySelectorAll(
+          "[data-i18n-html]"
+        )
+        .forEach(element => {
+
+          const key =
+            element.dataset.i18nHtml;
+
+          if (
+            dictionary[key]
+          ) {
+
+            element.innerHTML =
+              dictionary[key];
+
+          }
+
+        });
+
+
+      langButtons.forEach(
+        button => {
+
+          button.classList.toggle(
+            "active",
+            button.dataset.lang === lang
+          );
+
         }
+      );
+
+
+      localStorage.setItem(
+        "bilgegames-language",
+        lang
+      );
+
+    }
+
+
+
+    const savedLanguage =
+      localStorage.getItem(
+        "bilgegames-language"
+      );
+
+
+    const initialLanguage =
+
+      savedLanguage ||
+
+      (
+        navigator.language &&
+        navigator.language
+          .toLowerCase()
+          .startsWith("tr")
+
+          ? "tr"
+          : "en"
+      );
+
+
+    setLanguage(
+      initialLanguage
+    );
+
+
+    langButtons.forEach(
+      button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            setLanguage(
+              button.dataset.lang
+            );
+
+          }
+        );
+
+      }
+    );
+
+
+
+    /*
+      HEADER
+    */
+
+
+    const header =
+      document.getElementById(
+        "header"
+      );
+
+
+    function updateHeader() {
+
+      header.classList.toggle(
+        "scrolled",
+        window.scrollY > 20
+      );
+
+    }
+
+
+    updateHeader();
+
+
+    window.addEventListener(
+      "scroll",
+      updateHeader,
+      {
+        passive: true
+      }
+    );
+
+
+
+    /*
+      MOBILE MENU
+    */
+
+
+    const menuButton =
+      document.getElementById(
+        "menuButton"
+      );
+
+
+    const navLinks =
+      document.getElementById(
+        "navLinks"
+      );
+
+
+    menuButton.addEventListener(
+      "click",
+      () => {
+
+        navLinks.classList.toggle(
+          "open"
+        );
+
+      }
+    );
+
+
+    navLinks
+      .querySelectorAll("a")
+      .forEach(link => {
+
+        link.addEventListener(
+          "click",
+          () => {
+
+            navLinks.classList.remove(
+              "open"
+            );
+
+          }
+        );
+
       });
-    }, { threshold:.12 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+
+
+    /*
+      SCROLL ANIMATION
+    */
+
+
+    const observer =
+      new IntersectionObserver(
+
+        entries => {
+
+          entries.forEach(
+            entry => {
+
+              if (
+                entry.isIntersecting
+              ) {
+
+                entry.target
+                  .classList
+                  .add(
+                    "visible"
+                  );
+
+
+                observer.unobserve(
+                  entry.target
+                );
+
+              }
+
+            }
+          );
+
+        },
+
+        {
+          threshold: 0.10
+        }
+
+      );
+
+
+    document
+      .querySelectorAll(
+        ".reveal"
+      )
+      .forEach(
+        element => {
+
+          observer.observe(
+            element
+          );
+
+        }
+      );
+
+
   </script>
+
+
 </body>
 </html>
